@@ -1,0 +1,118 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &3056042223235827398
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: afa91c856793be840b087d833b79c6fa, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 506.98798
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: afa91c856793be840b087d833b79c6fa, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: afa91c856793be840b087d833b79c6fa, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 491.96152
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: afa91c856793be840b087d833b79c6fa, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: afa91c856793be840b087d833b79c6fa, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: afa91c856793be840b087d833b79c6fa, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: afa91c856793be840b087d833b79c6fa, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: afa91c856793be840b087d833b79c6fa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: afa91c856793be840b087d833b79c6fa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: afa91c856793be840b087d833b79c6fa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: afa91c856793be840b087d833b79c6fa, type: 3}
+      propertyPath: m_Name
+      value: Girl
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: afa91c856793be840b087d833b79c6fa, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 31b3b8d86d33c7342b52553a25623815, type: 2}
+    - target: {fileID: 5866666021909216657, guid: afa91c856793be840b087d833b79c6fa, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: afa91c856793be840b087d833b79c6fa, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2063385754413782855}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: afa91c856793be840b087d833b79c6fa, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7241875352003430284}
+  m_SourcePrefab: {fileID: 100100000, guid: afa91c856793be840b087d833b79c6fa, type: 3}
+--- !u!1 &2785573007276129175 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: afa91c856793be840b087d833b79c6fa, type: 3}
+  m_PrefabInstance: {fileID: 3056042223235827398}
+  m_PrefabAsset: {fileID: 0}
+--- !u!143 &2063385754413782855
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2785573007276129175}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 1.5
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0.9, z: 0}
+--- !u!114 &7241875352003430284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2785573007276129175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ca67c906f82f304798d38233f9a3776, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
+  walkSpeed: 3
+  runSpeed: 6
+  turnSpeed: 150
