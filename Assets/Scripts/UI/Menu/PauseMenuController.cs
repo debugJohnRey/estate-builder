@@ -20,10 +20,6 @@ public class PauseMenuController : MonoBehaviour
     public Slider sfxSlider;
     public Slider musicSlider;
 
-    [Header("Audio")]
-    public AudioSource sfxAudioSource;
-    public AudioSource musicAudioSource;
-
     private bool isMenuOpen = false;
     private bool isOptionsOpen = false;
     private Coroutine fadeCoroutine;
@@ -33,9 +29,16 @@ public class PauseMenuController : MonoBehaviour
         pauseMenuPanel.SetActive(false);
         optionsPanel.SetActive(false);
 
-        // load saved values
+        // Step 8 — load saved volumes into sliders
         sfxSlider.value = PlayerPrefs.GetFloat("SFXVolume", 1f);
         musicSlider.value = PlayerPrefs.GetFloat("MusicVolume", 1f);
+
+        // also apply loaded values to AudioManager immediately
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.SetSFXVolume(sfxSlider.value);
+            AudioManager.Instance.SetMusicVolume(musicSlider.value);
+        }
 
         // listeners
         menuButton.onClick.AddListener(ToggleMenu);
@@ -44,6 +47,7 @@ public class PauseMenuController : MonoBehaviour
         quitButton.onClick.AddListener(QuitGame);
         backButton.onClick.AddListener(CloseOptions);
 
+        // Step 8 — connect sliders to AudioManager
         sfxSlider.onValueChanged.AddListener(SetSFXVolume);
         musicSlider.onValueChanged.AddListener(SetMusicVolume);
     }
@@ -58,6 +62,7 @@ public class PauseMenuController : MonoBehaviour
     {
         isMenuOpen = true;
         pauseMenuPanel.SetActive(true);
+        AudioManager.Instance?.PlayButtonClick();   // Step 7
 
         if (fadeCoroutine != null) StopCoroutine(fadeCoroutine);
         fadeCoroutine = StartCoroutine(FadePanel(pauseMenuPanel, 0f, 1f, 0.2f));
@@ -68,6 +73,12 @@ public class PauseMenuController : MonoBehaviour
         isMenuOpen = false;
         isOptionsOpen = false;
         optionsPanel.SetActive(false);
+        AudioManager.Instance?.PlayButtonClick();   // Step 7
+
+        // make sure main buttons visible for next open
+        resumeButton.gameObject.SetActive(true);
+        optionsButton.gameObject.SetActive(true);
+        quitButton.gameObject.SetActive(true);
 
         if (fadeCoroutine != null) StopCoroutine(fadeCoroutine);
         fadeCoroutine = StartCoroutine(FadePanel(pauseMenuPanel, 1f, 0f, 0.2f, () =>
@@ -90,8 +101,8 @@ public class PauseMenuController : MonoBehaviour
     {
         isOptionsOpen = true;
         optionsPanel.SetActive(true);
+        AudioManager.Instance?.PlayButtonClick();   // Step 7
 
-        // hide main menu buttons so it looks clean
         resumeButton.gameObject.SetActive(false);
         optionsButton.gameObject.SetActive(false);
         quitButton.gameObject.SetActive(false);
@@ -101,36 +112,38 @@ public class PauseMenuController : MonoBehaviour
     {
         isOptionsOpen = false;
         optionsPanel.SetActive(false);
+        AudioManager.Instance?.PlayButtonClick();   // Step 7
 
-        // show main menu buttons again
         resumeButton.gameObject.SetActive(true);
         optionsButton.gameObject.SetActive(true);
         quitButton.gameObject.SetActive(true);
     }
+
+    // Step 8 — routes slider value to AudioManager
     void SetSFXVolume(float value)
     {
-        if (sfxAudioSource != null) sfxAudioSource.volume = value;
-        PlayerPrefs.SetFloat("SFXVolume", value);
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.SetSFXVolume(value);
     }
 
+    // Step 8 — routes slider value to AudioManager
     void SetMusicVolume(float value)
     {
-        if (musicAudioSource != null) musicAudioSource.volume = value;
-        PlayerPrefs.SetFloat("MusicVolume", value);
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.SetMusicVolume(value);
     }
 
     void QuitGame()
     {
+        AudioManager.Instance?.PlayButtonClick();   // Step 7
         Debug.Log("Quit");
         Application.Quit();
 
-        // in editor this won't quit, so:
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
     }
 
-    // Fade coroutine with optional callback
     IEnumerator FadePanel(GameObject panel, float fromAlpha, float toAlpha,
                           float duration, System.Action onComplete = null)
     {
@@ -153,22 +166,10 @@ public class PauseMenuController : MonoBehaviour
 
     void Update()
     {
-        // press Escape to close menu
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (isMenuOpen) CloseMenu();
+            if (isOptionsOpen) CloseOptions();      // escape from options → back to menu
+            else if (isMenuOpen) CloseMenu();        // escape from menu → back to game
         }
     }
-
-    //     void ToggleOptions()
-    // {
-    //     isOptionsOpen = !isOptionsOpen;
-
-    //     if (isOptionsOpen)
-    //         OpenOptions();
-    //     else
-    //         CloseOptions();
-    // }
-
-
 }
