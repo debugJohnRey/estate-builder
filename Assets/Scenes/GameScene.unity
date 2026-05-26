@@ -289,8 +289,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 380, y: 400}
+  m_AnchoredPosition: {x: -5.7726, y: -19.8672}
+  m_SizeDelta: {x: 407.2037, y: 439.7345}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &30481717
 MonoBehaviour:
@@ -948,7 +948,7 @@ MonoBehaviour:
   quitButton: {fileID: 1130901072}
   backButton: {fileID: 464374077}
   sfxSlider: {fileID: 1656817418}
-  musicSlider: {fileID: 0}
+  musicSlider: {fileID: 1027607054}
 --- !u!4 &140854796
 Transform:
   m_ObjectHideFlags: 0
@@ -6411,8 +6411,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 1.4000015, y: 0}
-  m_SizeDelta: {x: 6.1284, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 5, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &683293495
 MonoBehaviour:
@@ -7495,8 +7495,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 1.4000015, y: 0}
-  m_SizeDelta: {x: 6.1284, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 5, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &801387119
 MonoBehaviour:
@@ -31653,8 +31653,8 @@ RectTransform:
   m_Children:
   - {fileID: 1050809292}
   - {fileID: 1656817417}
-  - {fileID: 1027607053}
   - {fileID: 108104991}
+  - {fileID: 1027607053}
   - {fileID: 464374076}
   - {fileID: 251663325}
   - {fileID: 200950058}
@@ -31662,8 +31662,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -2.159668, y: -13.593201}
-  m_SizeDelta: {x: 18.1346, y: 27.1863}
+  m_AnchoredPosition: {x: 0.000015258789, y: -0.000015258789}
+  m_SizeDelta: {x: 0.000030518, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2093736178
 MonoBehaviour:
