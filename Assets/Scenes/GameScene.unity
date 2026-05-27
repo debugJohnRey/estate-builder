@@ -7932,7 +7932,7 @@ GameObject:
   - component: {fileID: 857381239}
   - component: {fileID: 857381238}
   m_Layer: 5
-  m_Name: Buy House
+  m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10086,11 +10086,7 @@ MonoBehaviour:
   expandCamera: {fileID: 728575088}
   minimapZoom: 20
   expandedZoom: 60
-<<<<<<< HEAD
-  mapOverlay: {fileID: 0}
-=======
   mapOverlay: {fileID: 1260272818}
->>>>>>> 6abc7c127650863325518bdb764b274cd4741753
 --- !u!114 &1084870735
 MonoBehaviour:
   m_ObjectHideFlags: 0
