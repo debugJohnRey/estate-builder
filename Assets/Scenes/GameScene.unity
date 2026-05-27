@@ -26349,7 +26349,7 @@ GameObject:
   - component: {fileID: 1786720515}
   - component: {fileID: 1786720516}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: ThirdPersonCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32663,10 +32663,10 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1786720514}
   - {fileID: 1899822230}
   - {fileID: 1560250519}
   - {fileID: 963805472965180524}
+  - {fileID: 1786720514}
   - {fileID: 1238692051}
   - {fileID: 1116937678}
   - {fileID: 377731558}
