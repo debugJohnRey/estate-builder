@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -sSL -o \"Assets/Plugins/SQLite.cs\" \"https://raw.githubusercontent.com/praeclarum/sqlite-net/master/src/SQLite.cs\")",
+      "Bash(curl -sSL -o \"Assets/Plugins/SQLiteAsync.cs\" \"https://raw.githubusercontent.com/praeclarum/sqlite-net/master/src/SQLiteAsync.cs\")"
+    ]
+  }
+}

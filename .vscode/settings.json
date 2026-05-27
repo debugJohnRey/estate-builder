@@ -67,6 +67,6 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "estate-builder.slnx",
+    "dotnet.defaultSolution": "Estate Builder.slnx",
     "dotnet.enableWorkspaceBasedDevelopment": false
 }
