@@ -3,11 +3,15 @@ using UnityEngine.EventSystems;
 
 public class MobileButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
-    public bool IsHeld     { get; private set; }
-    public bool WasPressed { get; private set; }
+    public bool IsHeld { get; private set; }
 
-    public void OnPointerDown(PointerEventData e) { IsHeld = true; WasPressed = true; }
-    public void OnPointerUp(PointerEventData e)   => IsHeld = false;
+    public event System.Action OnPressed;
 
-    void LateUpdate() => WasPressed = false;
+    public void OnPointerDown(PointerEventData e)
+    {
+        IsHeld = true;
+        OnPressed?.Invoke();
+    }
+
+    public void OnPointerUp(PointerEventData e) => IsHeld = false;
 }

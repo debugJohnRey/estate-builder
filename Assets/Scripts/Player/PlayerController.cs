@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
     private CharacterController cc;
     private Vector3 velocity;
     private bool isGrounded;
+    private bool jumpQueued;
 
     private static readonly int SpeedHash = Animator.StringToHash("Speed");
 
@@ -39,6 +40,15 @@ public class PlayerController : MonoBehaviour
     {
         cc = GetComponent<CharacterController>();
         animator = animator != null ? animator : GetComponentInChildren<Animator>();
+
+        if (jumpButton != null)
+            jumpButton.OnPressed += () => jumpQueued = true;
+    }
+
+    void OnDestroy()
+    {
+        if (jumpButton != null)
+            jumpButton.OnPressed -= () => jumpQueued = true;
     }
 
     void Update()
@@ -49,10 +59,15 @@ public class PlayerController : MonoBehaviour
 
     void HandleGravity()
     {
-        isGrounded = Physics.CheckSphere(transform.position, groundDistance, groundMask);
+        isGrounded = cc.isGrounded;
 
         if (isGrounded && velocity.y < 0f)
-            velocity.y = -2f;
+            velocity.y = -1f;
+
+        bool jumpPressed = Input.GetKeyDown(KeyCode.Space) || jumpQueued;
+        jumpQueued = false;
+        if (isGrounded && jumpPressed)
+            velocity.y = Mathf.Sqrt(jumpHeight * -1f * gravity);
 
         velocity.y += gravity * Time.deltaTime;
         cc.Move(velocity * Time.deltaTime);
@@ -63,13 +78,21 @@ public class PlayerController : MonoBehaviour
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
 
-        if (h == 0f && v == 0f)
+        // blend in joystick only when keyboard has no input on that axis
+        if (joystick != null)
+        {
+            if (Mathf.Abs(h) < 0.1f) h = joystick.Horizontal;
+            if (Mathf.Abs(v) < 0.1f) v = joystick.Vertical;
+        }
+
+        if (Mathf.Abs(h) < 0.01f && Mathf.Abs(v) < 0.01f)
         {
             UpdateAnimator(0f);
             return;
         }
 
-        bool isRunning = Input.GetKey(KeyCode.LeftShift);
+        bool isRunning = Input.GetKey(KeyCode.LeftShift)
+                      || (sprintButton != null && sprintButton.IsHeld);
         float speed = isRunning ? runSpeed : walkSpeed;
 
         Vector3 moveDir = GetCameraRelativeDirection(h, v);
