@@ -5889,6 +5889,7 @@ GameObject:
   - component: {fileID: 614223799}
   - component: {fileID: 614223801}
   - component: {fileID: 614223800}
+  - component: {fileID: 614223802}
   m_Layer: 5
   m_Name: ExpandMapPanel
   m_TagString: Untagged
@@ -5956,6 +5957,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 614223798}
   m_CullTransparentMesh: 1
+--- !u!114 &614223802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 614223798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3607b373e836f224eb3f4b3981c70068, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ClickableSFX
+  overrideClip: {fileID: 0}
 --- !u!64 &616020234
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -10175,6 +10189,7 @@ GameObject:
   - component: {fileID: 1084870735}
   - component: {fileID: 1084870734}
   - component: {fileID: 1084870733}
+  - component: {fileID: 1084870737}
   m_Layer: 5
   m_Name: MinimapRoot
   m_TagString: Untagged
@@ -10307,6 +10322,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1084870731}
   m_CullTransparentMesh: 1
+--- !u!114 &1084870737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1084870731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3607b373e836f224eb3f4b3981c70068, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ClickableSFX
+  overrideClip: {fileID: 0}
 --- !u!64 &1094880763
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -13579,7 +13607,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: 106d79ba256d3e1478de8eba618512ab, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

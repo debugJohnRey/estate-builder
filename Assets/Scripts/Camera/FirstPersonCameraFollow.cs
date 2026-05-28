@@ -26,22 +26,6 @@ public class FirstPersonCameraFollow : MonoBehaviour
         if (playerBody != null)
             rotY = playerBody.eulerAngles.y;
 
-        if (!PauseMenuController.IsMenuOpen)
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-        }
-    }
-
-    void OnApplicationFocus(bool hasFocus)
-    {
-        if (!hasFocus || PauseMenuController.IsMenuOpen) return;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    }
-
-    void OnDisable()
-    {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
@@ -49,16 +33,12 @@ public class FirstPersonCameraFollow : MonoBehaviour
     void LateUpdate()
     {
         if (playerBody == null) return;
+        if (PauseMenuController.IsMenuOpen) return;
 
-        // release cursor and pause camera when menu is open
-        if (PauseMenuController.IsMenuOpen)
-        {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-            return;
-        }
+        // hold right mouse button to rotate the first-person camera
+        if (Input.GetMouseButton(1))
+            HandleMouseLook();
 
-        HandleMouseLook();
         UpdatePosition();
     }
 
@@ -76,7 +56,6 @@ public class FirstPersonCameraFollow : MonoBehaviour
 
     void UpdatePosition()
     {
-        // follow player root position + fixed head offset (ignores bone animation)
         Vector3 headPos = new Vector3(
             playerBody.position.x,
             playerBody.position.y + headOffset.y,

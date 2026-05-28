@@ -108,17 +108,8 @@ public class PauseMenuController : MonoBehaviour
         if (povToggleController != null)
             povToggleController.ApplyCamerasExternal(isFirstPerson);
 
-        // restore cursor based on active POV
-        if (isFirstPerson)
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-        }
-        else
-        {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-        }
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     // ─── Options ─────────────────────────────────────────
