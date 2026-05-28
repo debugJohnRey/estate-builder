@@ -30,6 +30,7 @@ namespace EstateBuilder.Database
             Debug.Log($"[DB] Opened SQLite database at {dbPath}");
 
             CreateTables();
+            RunMigrations();
             SeedDataIfEmpty();
         }
 
@@ -51,11 +52,13 @@ namespace EstateBuilder.Database
                 CREATE TABLE IF NOT EXISTS Property (
                     property_id    INTEGER PRIMARY KEY AUTOINCREMENT,
                     name           TEXT,
+                    description    TEXT,
                     type           TEXT,
                     base_price     REAL,
                     zone           TEXT,
                     is_developable INTEGER DEFAULT 0,
-                    asset_ref      TEXT
+                    asset_ref      TEXT,
+                    image_ref      TEXT
                 )");
 
             db.Execute(@"
@@ -165,6 +168,41 @@ namespace EstateBuilder.Database
                     FOREIGN KEY(question_id)        REFERENCES QuizQuestion(question_id),
                     FOREIGN KEY(selected_option_id) REFERENCES QuizOption(option_id)
                 )");
+        }
+
+        void RunMigrations()
+        {
+            int dbVersion = db.ExecuteScalar<int>("PRAGMA user_version");
+
+            // v2: add a short description to each property
+            if (dbVersion < 2)
+            {
+                if (!ColumnExists("Property", "description"))
+                    db.Execute("ALTER TABLE Property ADD COLUMN description TEXT");
+
+                db.Execute("PRAGMA user_version = 2");
+            }
+
+            // v3: add a 2D image reference to each property
+            if (dbVersion < 3)
+            {
+                if (!ColumnExists("Property", "image_ref"))
+                    db.Execute("ALTER TABLE Property ADD COLUMN image_ref TEXT");
+
+                db.Execute("PRAGMA user_version = 3");
+            }
+        }
+
+        bool ColumnExists(string table, string column)
+        {
+            var columns = db.Query<TableColumn>($"PRAGMA table_info({table})");
+            return columns.Exists(c => c.name == column);
+        }
+
+        // Minimal row shape for reading PRAGMA table_info results.
+        private class TableColumn
+        {
+            public string name { get; set; }
         }
 
         void SeedDataIfEmpty()
