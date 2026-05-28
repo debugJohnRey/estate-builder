@@ -15,70 +15,78 @@ public class POVToggleController : MonoBehaviour
     public TMP_Text thirdPersonLabel;
 
     [Header("Knob Positions")]
-    public float knobOffX = -15f;    // left side = 3rd person
-    public float knobOnX = 15f;    // right side = 1st person
+    public float knobOffX = -15f;
+    public float knobOnX = 15f;
 
     [Header("Track Colors")]
-    public Color offColor = new Color(0.75f, 0.75f, 0.75f, 1f);  // gray
-    public Color onColor = new Color(0.18f, 0.85f, 0.27f, 1f);  // green
+    public Color offColor = new Color(0.75f, 0.75f, 0.75f, 1f);
+    public Color onColor = new Color(0.18f, 0.85f, 0.27f, 1f);
 
     [Header("Cameras")]
-    public Camera firstPersonCamera;
-    public Camera thirdPersonCamera;
-
-    // optional — your camera controller scripts
-    public MonoBehaviour firstPersonController;
-    public MonoBehaviour thirdPersonController;
+    public GameObject firstPersonCameraObj;
+    public GameObject thirdPersonCameraObj;
+    public FirstPersonCameraFollow firstPersonFollow;
+    public PlayerController playerController;
 
     private Coroutine animCoroutine;
+    private bool isInitialized = false;
+    private bool isFirstPerson = false;
+
+
 
     void Start()
     {
-        // load saved preference (default = off = 3rd person)
         bool savedState = PlayerPrefs.GetInt("POVMode", 0) == 1;
+
+        // remove listener BEFORE setting isOn to prevent false trigger
+        povToggle.onValueChanged.RemoveAllListeners();
         povToggle.isOn = savedState;
-
-        // set visuals immediately without animation on start
         SetVisualImmediate(savedState);
-
-        // apply camera state
         ApplyCameras(savedState);
 
-        // listen for changes
+        // add listener AFTER initial setup
         povToggle.onValueChanged.AddListener(OnToggleChanged);
+        isInitialized = true;
     }
 
     void OnToggleChanged(bool isOn)
     {
-        // save preference
-        PlayerPrefs.SetInt("POVMode", isOn ? 1 : 0);
+        if (!isInitialized) return;
 
-        // apply cameras
+        isFirstPerson = isOn;
+        PlayerPrefs.SetInt("POVMode", isOn ? 1 : 0);
+        UpdateLabelHighlight(isOn);
         ApplyCameras(isOn);
 
-        // animate toggle
         if (animCoroutine != null) StopCoroutine(animCoroutine);
         animCoroutine = StartCoroutine(AnimateToggle(isOn));
-
-        // update label highlights
-        UpdateLabelHighlight(isOn);
     }
 
     void ApplyCameras(bool isOn)
     {
-        // isOn = true  → 1st person
-        // isOn = false → 3rd person
-        if (firstPersonCamera != null)
-            firstPersonCamera.gameObject.SetActive(isOn);
+        // delay camera switch until menu closes
+        if (PauseMenuController.IsMenuOpen)
+        {
+            PlayerPrefs.SetInt("POVMode", isOn ? 1 : 0);
+            return;
+        }
 
-        if (thirdPersonCamera != null)
-            thirdPersonCamera.gameObject.SetActive(!isOn);
+        firstPersonCameraObj.SetActive(isOn);
+        thirdPersonCameraObj.SetActive(!isOn);
 
-        if (firstPersonController != null)
-            firstPersonController.enabled = isOn;
+        if (playerController != null)
+            playerController.isFirstPerson = isOn;
+    }
 
-        if (thirdPersonController != null)
-            thirdPersonController.enabled = !isOn;
+    // called by PauseMenuController when menu closes
+    public void ApplyCamerasExternal(bool isOn)
+    {
+
+        firstPersonCameraObj.SetActive(isOn);
+        thirdPersonCameraObj.SetActive(!isOn);
+
+        if (playerController != null)
+            playerController.isFirstPerson = isOn;
     }
 
     void SetVisualImmediate(bool isOn)
@@ -109,7 +117,6 @@ public class POVToggleController : MonoBehaviour
     {
         float duration = 0.2f;
         float elapsed = 0f;
-
         Vector2 fromPos = knob.anchoredPosition;
         Vector2 toPos = new Vector2(isOn ? knobOnX : knobOffX, 0f);
         Color fromColor = trackImage.color;
@@ -119,14 +126,11 @@ public class POVToggleController : MonoBehaviour
         {
             elapsed += Time.deltaTime;
             float t = Mathf.SmoothStep(0f, 1f, elapsed / duration);
-
             knob.anchoredPosition = Vector2.Lerp(fromPos, toPos, t);
             trackImage.color = Color.Lerp(fromColor, toColor, t);
-
             yield return null;
         }
 
-        // snap to final values
         knob.anchoredPosition = toPos;
         trackImage.color = toColor;
     }
