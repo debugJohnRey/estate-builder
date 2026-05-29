@@ -211,16 +211,25 @@ namespace EstateBuilder.Database
             if (count > 0) return;
 
             db.Execute(
-                "INSERT INTO Property (name, type, base_price, zone, is_developable, asset_ref) VALUES (?, ?, ?, ?, ?, ?)",
-                "Small House", "residential", 5000.0, "suburb", 0, "Prefabs/SmallHouse");
+                "INSERT INTO Property (name, description, type, base_price, zone, is_developable, asset_ref, image_ref) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+                "Tiny House",
+                "A tiny, bare-bones house tucked in a busy urban street. Small space, big opportunity.",
+                "single_family", 50000.0, "urban", 0,
+                "Prefabs/Properties/TinyHouse", "Sprites/Properties/tiny_house");
 
             db.Execute(
-                "INSERT INTO Property (name, type, base_price, zone, is_developable, asset_ref) VALUES (?, ?, ?, ?, ?, ?)",
-                "Empty Lot", "land", 2000.0, "suburb", 1, "Prefabs/EmptyLot");
+                "INSERT INTO Property (name, description, type, base_price, zone, is_developable, asset_ref, image_ref) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+                "Basic Family Home",
+                "A simple three-bedroom house in a quiet city neighborhood. Reliable and low maintenance.",
+                "single_family", 190000.0, "urban", 0,
+                "Prefabs/Properties/BasicFamily", "Sprites/Properties/basic_family");
 
             db.Execute(
-                "INSERT INTO Property (name, type, base_price, zone, is_developable, asset_ref) VALUES (?, ?, ?, ?, ?, ?)",
-                "Apartment Unit", "residential", 12000.0, "downtown", 0, "Prefabs/Apartment");
+                "INSERT INTO Property (name, description, type, base_price, zone, is_developable, asset_ref, image_ref) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+                "Modern City Home",
+                "A newly built modern home with clean architecture and quality finishes.",
+                "single_family", 480000.0, "urban", 0,
+                "Prefabs/Properties/ModernHome", "Sprites/Properties/modern_home");
         }
 
         public SQLiteConnection GetDB() => db;
