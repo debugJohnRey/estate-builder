@@ -5,45 +5,67 @@ using UnityEngine.SceneManagement;
 
 public class CharacterSelect : MonoBehaviour
 {
-    [Header("UI References")]
+    // ── Inspector fields ─────────────────────────────────────────────────────
+
+    [Header("Input / Confirm")]
     [SerializeField] private TMP_InputField nameInputField;
-    [SerializeField] private Button maleButton;
-    [SerializeField] private Button femaleButton;
     [SerializeField] private Button confirmButton;
 
-    [Header("Selection Settings")]
-    [SerializeField] private Color selectedColor = Color.green;
-    [SerializeField] private Color defaultColor = Color.white;
+    [Header("Gender Buttons")]
+    [SerializeField] private Button maleButton;
+    [SerializeField] private Button femaleButton;
+
+    [Header("Character Outline GameObjects")]
+    [Tooltip("The 'm_outline' GameObject (blue neon sprite) — shown when Male is selected.")]
+    [SerializeField] private GameObject maleOutlineObject;
+    [Tooltip("The 'f_outline' GameObject (pink neon sprite) — shown when Female is selected.")]
+    [SerializeField] private GameObject femaleOutlineObject;
+
+    [Header("Button Tint Colours")]
+    [SerializeField] private Color selectedButtonColor = new Color(0.55f, 0.55f, 0.55f, 1f); // gray
+    [SerializeField] private Color defaultButtonColor = Color.white;
 
     private string selectedGender = "";
     private string playerName = "";
 
     void Start()
     {
-        // Add listeners for gender buttons
-        maleButton.onClick.AddListener(() => SelectGender("Male", maleButton));
-        femaleButton.onClick.AddListener(() => SelectGender("Female", femaleButton));
+        maleButton.onClick.AddListener(() => SelectGender("Male", maleButton, maleOutlineObject));
+        femaleButton.onClick.AddListener(() => SelectGender("Female", femaleButton, femaleOutlineObject));
         confirmButton.onClick.AddListener(ConfirmSelection);
 
-        // IMPORTANT: Add listener for name input field changes
-        nameInputField.onValueChanged.AddListener(delegate { OnNameChanged(); });
+        nameInputField.onValueChanged.AddListener(_ => OnNameChanged());
 
+        ResetVisuals();
         confirmButton.interactable = false;
     }
 
-    void SelectGender(string gender, Button clickedButton)
+    // ── Gender selection ──────────────────────────────────────────────────────
+
+    void SelectGender(string gender, Button clickedBtn, GameObject outlineToShow)
     {
         selectedGender = gender;
-        ResetButtonColors();
-        clickedButton.image.color = selectedColor;
+
+        ResetVisuals();
+
+        clickedBtn.image.color = selectedButtonColor;
+
+        if (outlineToShow != null)
+            outlineToShow.SetActive(true);
+
         CheckValidation();
     }
 
-    void ResetButtonColors()
+    void ResetVisuals()
     {
-        maleButton.image.color = defaultColor;
-        femaleButton.image.color = defaultColor;
+        if (maleButton != null) maleButton.image.color = defaultButtonColor;
+        if (femaleButton != null) femaleButton.image.color = defaultButtonColor;
+
+        if (maleOutlineObject != null) maleOutlineObject.SetActive(false);
+        if (femaleOutlineObject != null) femaleOutlineObject.SetActive(false);
     }
+
+    // ── Name input ────────────────────────────────────────────────────────────
 
     public void OnNameChanged()
     {
@@ -53,19 +75,20 @@ public class CharacterSelect : MonoBehaviour
 
     void CheckValidation()
     {
-        confirmButton.interactable = !string.IsNullOrEmpty(playerName) && !string.IsNullOrEmpty(selectedGender);
+        confirmButton.interactable =
+            !string.IsNullOrEmpty(playerName) &&
+            !string.IsNullOrEmpty(selectedGender);
     }
+
+    // ── Confirm ───────────────────────────────────────────────────────────────
 
     void ConfirmSelection()
     {
-        // Save data to PlayerPrefs
         PlayerPrefs.SetString("PlayerName", playerName);
         PlayerPrefs.SetString("PlayerGender", selectedGender);
         PlayerPrefs.Save();
 
-        Debug.Log($"Character Created: {playerName} as {selectedGender}");
-
-        // Load the GameScene
+        Debug.Log($"[CharacterSelect] Player: {playerName} | Gender: {selectedGender}");
         SceneManager.LoadScene("GameScene");
     }
 }

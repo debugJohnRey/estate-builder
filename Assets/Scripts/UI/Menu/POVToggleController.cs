@@ -53,6 +53,8 @@ public class POVToggleController : MonoBehaviour
     {
         if (!isInitialized) return;
 
+        AudioManager.Instance?.PlayToggleSFX();
+
         isFirstPerson = isOn;
         PlayerPrefs.SetInt("POVMode", isOn ? 1 : 0);
         UpdateLabelHighlight(isOn);
