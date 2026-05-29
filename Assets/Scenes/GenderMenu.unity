@@ -1036,12 +1036,10 @@ MonoBehaviour:
   confirmButton: {fileID: 1560010801}
   maleButton: {fileID: 1901686024}
   femaleButton: {fileID: 1275970988}
-  maleIconOutline: {fileID: 458549487}
-  femaleIconOutline: {fileID: 0}
+  maleOutlineObject: {fileID: 458549484}
+  femaleOutlineObject: {fileID: 1090170389}
   selectedButtonColor: {r: 0.55, g: 0.55, b: 0.55, a: 1}
   defaultButtonColor: {r: 1, g: 1, b: 1, a: 1}
-  selectedOutlineColor: {r: 1, g: 0.84, b: 0, a: 1}
-  defaultOutlineColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &1032704157
 GameObject:
   m_ObjectHideFlags: 0
