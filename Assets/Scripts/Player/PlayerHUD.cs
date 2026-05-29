@@ -24,7 +24,6 @@ public class PlayerHUD : MonoBehaviour
         LoadAndDisplayPlayerData();
     }
 
-    // Call this any time you want to refresh the HUD (e.g. after a save/load).
     public void LoadAndDisplayPlayerData()
     {
         string savedName = PlayerPrefs.GetString("PlayerName", "Player");
@@ -38,15 +37,12 @@ public class PlayerHUD : MonoBehaviour
     {
         if (playerNameText == null)
         {
-            Debug.LogWarning("PlayerHUD: playerNameText is not assigned in the Inspector.");
+            Debug.LogWarning("PlayerHUD: playerNameText is not assigned.");
             return;
         }
 
-        // Apply the custom game font if one is assigned in the Inspector
         if (profileNameFont != null)
-        {
             playerNameText.font = profileNameFont;
-        }
 
         playerNameText.text = playerName;
     }
@@ -55,7 +51,7 @@ public class PlayerHUD : MonoBehaviour
     {
         if (avatarIcon == null)
         {
-            Debug.LogWarning("PlayerHUD: avatarIcon is not assigned in the Inspector.");
+            Debug.LogWarning("PlayerHUD: avatarIcon is not assigned.");
             return;
         }
 
@@ -64,11 +60,9 @@ public class PlayerHUD : MonoBehaviour
             case "Male":
                 avatarIcon.sprite = maleSprite != null ? maleSprite : defaultSprite;
                 break;
-
             case "Female":
                 avatarIcon.sprite = femaleSprite != null ? femaleSprite : defaultSprite;
                 break;
-
             default:
                 avatarIcon.sprite = defaultSprite;
                 Debug.LogWarning($"PlayerHUD: Unknown gender '{gender}' – using default sprite.");
