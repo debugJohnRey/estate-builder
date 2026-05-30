@@ -93,13 +93,16 @@ public class ThirdPersonCamera : MonoBehaviour
     Vector3 CheckCollision(Vector3 from, Vector3 to)
     {
         Vector3 dir = to - from;
-        RaycastHit hit;
+        float dist = dir.magnitude;
+        if (dist <= 0f) return to;
 
-        if (dir.magnitude > 0 && Physics.SphereCast(
-            from, collisionRadius, dir.normalized,
-            out hit, dir.magnitude, collisionMask))
+        RaycastHit hit;
+        if (Physics.SphereCast(from, collisionRadius, dir.normalized, out hit, dist, collisionMask))
         {
-            return hit.point + hit.normal * collisionRadius;
+            // Keep camera on the target→desired line and never closer than minDistance,
+            // so it cannot clip through walls or enter the character body.
+            float safeDistance = Mathf.Max(hit.distance, minDistance);
+            return from + dir.normalized * safeDistance;
         }
 
         return to;

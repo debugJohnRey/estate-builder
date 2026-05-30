@@ -10,7 +10,7 @@ public class NPCController : MonoBehaviour
     public KeyCode interactionKey = KeyCode.E;
 
     [Header("References")]
-    public Transform playerTransform;   // drag Girl here
+    public Transform playerTransform;
 
     // face player when talking
     public float turnSpeed = 5f;
@@ -25,13 +25,13 @@ public class NPCController : MonoBehaviour
     {
         animator = GetComponent<Animator>();
 
-        // auto find player if not assigned
-        if (playerTransform == null)
-        {
-            GameObject player = GameObject.FindWithTag("Player");
-            if (player != null)
-                playerTransform = player.transform;
-        }
+        // Always resolve by tag so it tracks whichever character was selected (boy/girl).
+        // CharacterSpawner.Awake() already set the "Player" tag before this runs.
+        GameObject player = GameObject.FindWithTag("Player");
+        if (player != null)
+            playerTransform = player.transform;
+        else
+            Debug.LogWarning($"[NPCController] {name}: No GameObject tagged 'Player' found.");
     }
 
     void Update()

@@ -4,7 +4,7 @@ public class FirstPersonCameraFollow : MonoBehaviour
 {
     [Header("Target")]
     public Transform playerBody;
-    public Vector3 headOffset = new Vector3(0f, 1.7f, 0.1f);
+    public Vector3 headOffset = new Vector3(0f, 2.05f, 0.1f);
 
     [Header("Mouse Look")]
     public float mouseSensitivityX = 3f;

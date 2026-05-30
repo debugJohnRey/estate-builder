@@ -16187,7 +16187,7 @@ MonoBehaviour:
   thirdPersonCamera: {fileID: 1786720516}
   firstPersonCamera: {fileID: 1875069354}
   isFirstPerson: 0
-  animator: {fileID: 1530189393}
+  animator: {fileID: 0}
 --- !u!143 &1466627102
 CharacterController:
   m_ObjectHideFlags: 0
@@ -16212,7 +16212,7 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &1466627103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16225,7 +16225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9690a57885cf6fa4cbb37dd5a3472a88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraTargetFollow
-  player: {fileID: 708904572}
+  player: {fileID: 0}
   offset: {x: 0, y: 1.5, z: 0}
 --- !u!64 &1468776044
 MeshCollider:
@@ -16899,11 +16899,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!95 &1530189393 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 8864117178724629335, guid: ea334aaba4cd5fe478051f2cc9d15d5b, type: 3}
-  m_PrefabInstance: {fileID: 963805472965180524}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1530189394 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7241875352003430284, guid: ea334aaba4cd5fe478051f2cc9d15d5b, type: 3}
@@ -29083,7 +29078,7 @@ MonoBehaviour:
   scrollSpeed: 3
   collisionMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 0
   collisionRadius: 0.2
 --- !u!64 &1786937216
 MeshCollider:
@@ -31273,7 +31268,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FirstPersonCameraFollow
   playerBody: {fileID: 708904572}
-  headOffset: {x: 0, y: 1.7, z: 0.1}
+  headOffset: {x: 0, y: 2.05, z: 0.1}
   mouseSensitivityX: 3
   mouseSensitivityY: 2
   minVerticalAngle: -60
@@ -36655,7 +36650,7 @@ MonoBehaviour:
   dialog: {fileID: 11400000, guid: aded65702b941394d824687f7e711906, type: 2}
   interactionDistance: 3
   interactionKey: 101
-  playerTransform: {fileID: 708904572}
+  playerTransform: {fileID: 0}
   turnSpeed: 5
 --- !u!1001 &7762483151639959454
 PrefabInstance:
@@ -36798,6 +36793,7 @@ SceneRoots:
   - {fileID: 1466627100}
   - {fileID: 1786720514}
   - {fileID: 1875069352}
+  - {fileID: 1804584058650004518}
   - {fileID: 187304058}
   - {fileID: 1238692051}
   - {fileID: 1116937678}
@@ -36805,7 +36801,6 @@ SceneRoots:
   - {fileID: 140854796}
   - {fileID: 1760784213}
   - {fileID: 370017005}
-  - {fileID: 1804584058650004518}
   - {fileID: 2065534149}
   - {fileID: 330762086}
   - {fileID: 1815309582}

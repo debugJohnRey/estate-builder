@@ -113,12 +113,15 @@ public class PlayerController : MonoBehaviour
 
     Vector3 GetCameraRelativeDirection(float h, float v)
     {
-        // pick the active camera transform
-        Transform camTransform = isFirstPerson && firstPersonCamera != null
-            ? firstPersonCamera.transform
-            : thirdPersonCamera != null
-                ? thirdPersonCamera.transform
-                : null;
+        // pick whichever camera is actually active so it works regardless of
+        // which character is selected (the isFirstPerson flag is only wired to
+        // one PlayerController via POVToggleController)
+        Transform camTransform =
+            (firstPersonCamera != null && firstPersonCamera.gameObject.activeInHierarchy)
+                ? firstPersonCamera.transform
+                : thirdPersonCamera != null
+                    ? thirdPersonCamera.transform
+                    : null;
 
         if (camTransform == null)
             return new Vector3(h, 0f, v).normalized;
