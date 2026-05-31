@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a344f9b24e7c2b40bb1478082308ef7, type: 3}
   m_Name: MrLedgerRevisitDialog
   m_EditorClassIdentifier: Assembly-CSharp::NPCDialog
-  npcName: 
-  lines: []
+  npcName: Mr. Ledger
+  lines:
+  - Still on your way? The specialists are waiting for you!
+  - "Remember \u2014 find all 6 to unlock the final simulation. Good luck!"

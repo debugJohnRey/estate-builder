@@ -12,5 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a344f9b24e7c2b40bb1478082308ef7, type: 3}
   m_Name: FABM-BriefingDialog
   m_EditorClassIdentifier: Assembly-CSharp::NPCDialog
-  npcName: 
-  lines: []
+  npcName: "Se\xF1or Bautista"
+  lines:
+  - "Mabuhay! So you want to be a business owner? Then first \u2014 you must learn
+    to read your own numbers."
+  - In my tasks, you will classify accounts, record journal entries, and analyze
+    financial statements.
+  - Accounting is the language of business. Let us begin!
