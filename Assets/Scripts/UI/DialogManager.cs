@@ -13,6 +13,7 @@ public class DialogManager : MonoBehaviour
     public TMP_Text npcNameText;
     public TMP_Text dialogText;
     public Button nextButton;
+    public TMP_Text nextButtonLabel;
     public Button closeButton;
 
     [Header("Typewriter Settings")]
@@ -76,7 +77,7 @@ public class DialogManager : MonoBehaviour
     {
         isTyping = true;
         dialogText.text = "";
-        nextButton.GetComponentInChildren<TMP_Text>().text = "Skip";
+        nextButtonLabel.text = "Skip";
 
         foreach (char c in line)
         {
@@ -85,7 +86,7 @@ public class DialogManager : MonoBehaviour
         }
 
         isTyping = false;
-        nextButton.GetComponentInChildren<TMP_Text>().text =
+        nextButtonLabel.text =
             currentLineIndex < currentDialog.lines.Length - 1 ? "Next" : "Close";
     }
 
@@ -97,7 +98,7 @@ public class DialogManager : MonoBehaviour
             StopCoroutine(typewriterCoroutine);
             dialogText.text = currentDialog.lines[currentLineIndex];
             isTyping = false;
-            nextButton.GetComponentInChildren<TMP_Text>().text =
+            nextButtonLabel.text =
                 currentLineIndex < currentDialog.lines.Length - 1 ? "Next" : "Close";
             return;
         }
