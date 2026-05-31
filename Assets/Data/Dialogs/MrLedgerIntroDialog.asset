@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a344f9b24e7c2b40bb1478082308ef7, type: 3}
+  m_Name: MrLedgerIntroDialog
+  m_EditorClassIdentifier: Assembly-CSharp::NPCDialog
+  npcName: Mr. Ledger
+  lines:
+  - "Ah, you must be our newest student! Welcome to Estate Builder \u2014 the place
+    where future business professionals are made."
+  - I am Mr. Ledger, the Academy Director. I will guide you through your journey
+    here.
+  - "Across the Academy are 6 Subject Specialists \u2014 each one a master of their
+    field. Find them, complete their tasks, and earn coins!"
+  - "Finish all 6, and you will unlock the ultimate challenge \u2014 the Business
+    Enterprise Simulation!"
+  - "Start anywhere you like. But I suggest visiting Se\xF1or Bautista first \u2014
+    he is in the Accounting Wing. Now go, student!"

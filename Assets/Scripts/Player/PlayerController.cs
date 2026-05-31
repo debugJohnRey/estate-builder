@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 velocity;
     private bool isGrounded;
     private bool jumpQueued;
+    private bool inputBlocked = false;
 
     private static readonly int SpeedHash = Animator.StringToHash("Speed");
 
@@ -75,6 +76,13 @@ public class PlayerController : MonoBehaviour
 
     void HandleMovement()
     {
+        // Popup is open — block all input but gravity still runs above
+        if (inputBlocked)
+        {
+            UpdateAnimator(0f);
+            return;
+        }
+
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
 
@@ -148,6 +156,19 @@ public class PlayerController : MonoBehaviour
             animator.SetFloat(SpeedHash, speed, 0.1f, Time.deltaTime);
     }
 
-    public void EnableController() => enabled = true;
-    public void DisableController() => enabled = false;
+    public void EnableController()
+    {
+        enabled = true;
+        inputBlocked = false;
+    }
+
+    public void DisableController()
+    {
+        // Do NOT set enabled = false — that stops gravity and causes falling.
+        // Only block input so the character stays grounded normally.
+        inputBlocked = true;
+    }
+
+    public void DisableInput() => inputBlocked = true;
+    public void EnableInput() => inputBlocked = false;
 }

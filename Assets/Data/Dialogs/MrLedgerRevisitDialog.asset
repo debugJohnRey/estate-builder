@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a344f9b24e7c2b40bb1478082308ef7, type: 3}
+  m_Name: MrLedgerRevisitDialog
+  m_EditorClassIdentifier: Assembly-CSharp::NPCDialog
+  npcName: Mr. Ledger
+  lines:
+  - Still on your way? The specialists are waiting for you!
+  - "Remember \u2014 find all 6 to unlock the final simulation. Good luck!"
