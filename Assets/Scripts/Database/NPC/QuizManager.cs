@@ -157,7 +157,7 @@ public class QuizManager : MonoBehaviour
 
     void SetPlayerMovement(bool enabled)
     {
-        var players = FindObjectsByType<PlayerController>(FindObjectsSortMode.None);
+        var players = FindObjectsByType<PlayerController>();
         foreach (var p in players)
         {
             if (enabled) p.EnableController();

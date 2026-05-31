@@ -15,7 +15,7 @@ public class IntroPopupUI : MonoBehaviour
     public float fadeOutDuration = 0.3f;
 
     const string TITLE =
-        "Welcome to ABM Academy!";
+        "Welcome to Estate Builder!";
 
     const string MESSAGE =
         "Before your journey begins, you must first speak with\n" +
@@ -47,7 +47,7 @@ public class IntroPopupUI : MonoBehaviour
 
         titleText.text = TITLE;
         messageText.text = MESSAGE;
-        okButton.GetComponentInChildren<TMP_Text>().text = "Got it — let's go!";
+        okButton.GetComponentInChildren<TMP_Text>().text = "Got it!";
         okButton.onClick.AddListener(OnOKPressed);
 
         // Block input now that all controllers are initialized

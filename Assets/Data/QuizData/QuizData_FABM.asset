@@ -12,7 +12,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8c7605374b9aea44a77f1beeca0476e, type: 3}
   m_Name: QuizData_FABM
   m_EditorClassIdentifier: Assembly-CSharp::QuizData
-  npcID: 
-  subjectName: 
-  subjectColor: {r: 1, g: 1, b: 1, a: 1}
-  questions: []
+  npcID: fabm
+  subjectName: Fundamentals of Accountancy
+  subjectColor: {r: 0.2901961, g: 0.5647059, b: 0.8509804, a: 1}
+  questions:
+  - questionText: Accounts Receivable is an example of which type of account?
+    choices:
+    - ' Asset'
+    - ' Liability'
+    - ' Equity'
+    - ' Expense'
+    correctIndex: 0
+    explanation: "Correct! Accounts Receivable is an Asset \u2014 it represents money
+      owed TO the business by customers."
+  - questionText: "A business buys equipment worth \u20B150,000 in cash.  Which account
+      is DEBITED?"
+    choices:
+    - Cash
+    - Accounts Payable
+    - Equipment
+    - Owner's Equity
+    correctIndex: 2
+    explanation: "Equipment is debited because it ENTERS the business. \nCash is
+      credited because it LEAVES. \n Debit what comes in, credit what goes out."
+  - questionText: Which of the following is found on the Income Statement?
+    choices:
+    - Accounts Payable
+    - Service Revenue
+    - Equipment
+    - Owner's Capital
+    correctIndex: 1
+    explanation: "The Income Statement shows revenues and expenses only. \nService
+      Revenue is income earned by the business."
+  - questionText: 'The accounting equation is:'
+    choices:
+    - Assets = Liabilities + Owner's Equity
+    - Assets = Revenue - Expenses
+    - Assets + Liabilities = Owner's Equity
+    - 
+    correctIndex: 0
+    explanation: 
+  - questionText: "An owner withdraws \u20B110,000 from the business for personal
+      use. This transaction:"
+    choices:
+    - Increases assets and liabilities
+    - Decreases assets and decreases Owner's Equity
+    - Is recorded as a business expense
+    - Has no effect on the accounting equation
+    correctIndex: 1
+    explanation: "Withdrawals decrease Cash (an asset) and decrease Owner's Equity.
+      They are NOT expenses \u2014 they are personal drawings by the owner."
