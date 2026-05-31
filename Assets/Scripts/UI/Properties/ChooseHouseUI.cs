@@ -9,20 +9,33 @@ public class ChooseHouseUI : MonoBehaviour
     public GameObject cardPrefab;
     public Transform  content;
     public Button     closeBtn;
+    public GameObject notEnoughCashPanel;
 
-    private bool isReady = false; // ← guard flag
+    private bool isReady = false;
+    private Transform currentPlot; 
 
     void Start()
     {
-        closeBtn.onClick.AddListener(() => gameObject.SetActive(false));
-        isReady = true;          // ← DatabaseManager is guaranteed ready by now
+        closeBtn.onClick.AddListener(ClosePanel);
+        isReady = true;
         gameObject.SetActive(false);
     }
 
     void OnEnable()
     {
-        if (!isReady) return;    // ← skip if Start hasn't run yet
+        if (!isReady) return;
         LoadProperties();
+    }
+
+    public void OpenPanel(Transform plotTransform)
+    {
+        currentPlot = plotTransform;
+        gameObject.SetActive(true);
+    }
+
+    public void ClosePanel()
+    {
+        gameObject.SetActive(false);
     }
 
     void LoadProperties()
@@ -41,6 +54,22 @@ public class ChooseHouseUI : MonoBehaviour
 
     void OnBuyClicked(PropertyData property)
     {
-        Debug.Log($"Buying {property.name}");
+        int playerId = 1;
+        int currentDay = DatabaseManager.Instance.GetDB()
+                        .ExecuteScalar<int>("SELECT game_day FROM Player WHERE player_id = 1");
+
+        bool success = new PropertyRepository()
+            .BuyProperty(playerId, property.property_id, property.base_price, currentDay);
+
+        if (success)
+        {
+            TerrainPlacer.Instance.Place(property, currentPlot);
+            PlayerManager.Instance.RefreshCash(); // ADD THIS LINE
+            ClosePanel();
+        }
+        else
+        {
+            notEnoughCashPanel.SetActive(true); // ADD THIS LINE
+        }
     }
 }

@@ -9,5 +9,6 @@ namespace EstateBuilder.Models
         public double current_value       { get; set; }
         public string status              { get; set; }
         public int    game_day_purchased  { get; set; }
+        public int    plot_id             { get; set; }
     }
 }

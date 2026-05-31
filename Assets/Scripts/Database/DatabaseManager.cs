@@ -26,6 +26,8 @@ namespace EstateBuilder.Database
         void InitDatabase()
         {
             string dbPath = Path.Combine(Application.persistentDataPath, "realestate.db");
+
+            File.Delete(dbPath);
             db = new SQLiteConnection(dbPath);
             Debug.Log($"[DB] Opened SQLite database at {dbPath}");
 
@@ -41,7 +43,7 @@ namespace EstateBuilder.Database
                     player_id     INTEGER PRIMARY KEY AUTOINCREMENT,
                     name          TEXT,
                     gender        TEXT,
-                    cash_balance  REAL DEFAULT 10000,
+                    cash_balance  REAL DEFAULT 200000,
                     net_worth     REAL DEFAULT 0,
                     game_day      INTEGER DEFAULT 1,
                     created_at    TEXT,
@@ -191,6 +193,13 @@ namespace EstateBuilder.Database
 
                 db.Execute("PRAGMA user_version = 3");
             }
+
+            // v4: add plot_id to PlayerProperty
+            if (dbVersion < 4)
+            {
+                db.Execute("ALTER TABLE PlayerProperty ADD COLUMN plot_id INTEGER");
+                db.Execute("PRAGMA user_version = 4");
+            }
         }
 
         bool ColumnExists(string table, string column)
@@ -207,8 +216,16 @@ namespace EstateBuilder.Database
 
         void SeedDataIfEmpty()
         {
-            int count = db.ExecuteScalar<int>("SELECT COUNT(*) FROM Property");
-            if (count > 0) return;
+            // 1. Seed Player exactly as ID 1
+            int playerCount = db.ExecuteScalar<int>("SELECT COUNT(*) FROM Player");
+            if (playerCount == 0)
+            {
+                db.Execute("INSERT INTO Player (player_id, name, gender, cash_balance, net_worth, game_day) VALUES (1, 'John', 'Male', 100000.0, 0, 1)");
+            }
+
+            // 2. Seed Properties
+            int propCount = db.ExecuteScalar<int>("SELECT COUNT(*) FROM Property");
+            if (propCount > 0) return;
 
             db.Execute(
                 "INSERT INTO Property (name, description, type, base_price, zone, is_developable, asset_ref, image_ref) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
@@ -230,7 +247,7 @@ namespace EstateBuilder.Database
                 "A newly built modern home with clean architecture and quality finishes.",
                 "single_family", 480000.0, "urban", 0,
                 "Prefabs/Properties/ModernHome", "Sprites/Properties/modern_home");
-        }
+        }   
 
         public SQLiteConnection GetDB() => db;
 
